@@ -34,10 +34,7 @@ export class MSSQLMigrator implements IMigrator {
         return readFileSync(path).toString();
     }
 
-    private async setupDatabase() {
-        /**
-         * Make sure we have the database set up before we make the actual connection
-         */
+    private async  getDBIndependentConnection(): Promise<sql.ConnectionPool> {
         const {database, ...restConfig} = this.config.db
 
         const tempConnection = await sql.connect({
@@ -47,9 +44,23 @@ export class MSSQLMigrator implements IMigrator {
             }
         })
 
-        await tempConnection.query(`DROP DATABASE IF EXISTS ${this.config.db.database};`);
+        return tempConnection
+    }
+
+    private async setupDatabase() {
+        /**
+         * Make sure we have the database set up before we make the actual connection
+         */
+        const tempConnection = await this.getDBIndependentConnection()
+
         await tempConnection.query(`CREATE DATABASE ${this.config.db.database};`);
 
+        await tempConnection.close()
+    }
+
+    private async teardownDatabase() {
+        const tempConnection = await this.getDBIndependentConnection()
+        await tempConnection.query(`DROP DATABASE IF EXISTS ${this.config.db.database};`);
         await tempConnection.close()
     }
 
@@ -73,6 +84,7 @@ export class MSSQLMigrator implements IMigrator {
     async down() {
         await this.mssqlClient.query(this.readMigrationFile('down'))
         await this.disconnect()
+        await this.teardownDatabase()
     }
 
     async up() {

@@ -3,7 +3,6 @@ import {logger, runCmd} from "../utils";
 import {join} from 'path'
 import {IMigrator, MSSQLMigrator} from "../Migrator";
 
-const Postgrator = require('postgrator')
 
 type DBStateName =
     | 'basic-one-to-one'
