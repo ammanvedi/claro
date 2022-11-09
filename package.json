@@ -1,0 +1,28 @@
+{
+  "name": "claro",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "The introspection only ORM",
+  "main": "index.js",
+  "author": "amman.vedi@gmail.com",
+  "engines": {
+    "node": "18.12.1"
+  },
+  "scripts": {
+    "test:start-containers": "docker-compose -f test/docker-compose.yml up",
+    "test": "jest"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "fp-ts": "^2.13.1"
+  },
+  "devDependencies": {
+    "@types/mssql": "^8.1.1",
+    "mssql": "^9.0.1",
+    "@types/jest": "^29.2.2",
+    "jest": "^29.3.0",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
+}
