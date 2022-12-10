@@ -1,7 +1,13 @@
-CREATE TABLE Persons (
-    PersonID int,
-    LastName varchar(255),
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255)
+CREATE TABLE [Employee] (
+    [ID]    INT PRIMARY KEY
+,   [Name]  VARCHAR(50)
 );
+
+CREATE TABLE [Salary] (
+    [EmployeeID]    INT UNIQUE NOT NULL
+,   [SalaryAmount]  INT
+);
+
+ALTER TABLE [Salary]
+ADD CONSTRAINT FK_Salary_Employee FOREIGN KEY([EmployeeID])
+    REFERENCES [Employee]([ID]);

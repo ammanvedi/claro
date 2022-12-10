@@ -1,1 +1,2 @@
-DROP TABLE Persons
+DROP TABLE Salary;
+DROP TABLE Employee;
