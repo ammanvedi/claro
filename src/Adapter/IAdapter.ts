@@ -1,3 +1,5 @@
+import * as TE from "fp-ts/TaskEither";
+import {EntityError} from "../Dialect/MSSQL/determineEntities";
 
 type EntityId = string;
 
@@ -26,7 +28,8 @@ type EntityRelationOneToOne = {
         field: string
     },
     destination: {
-        id: EntityId
+        id: EntityId,
+        field: string
     }
 }
 
@@ -38,11 +41,8 @@ export type Entity = {
     fields: EntityField[]
 }
 
-
-
-
 export interface IAdapter {
-    connect(): Promise<void>
-    determineRelationships(): EntityRelationShip[];
-    determineEntities(): Entity[]
+    connect(): TE.TaskEither<EntityError, void>
+    determineRelationships(): TE.TaskEither<EntityError, EntityRelationShip[]>;
+    determineEntities(): TE.TaskEither<EntityError, Entity[]>
 }

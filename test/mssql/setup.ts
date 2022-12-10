@@ -2,20 +2,11 @@ import * as sql from 'mssql'
 import {logger, runCmd} from "../utils";
 import {join} from 'path'
 import {IMigrator, MSSQLMigrator} from "../Migrator";
+import {config} from "./config";
 
 
 type DBStateName =
     | 'basic-one-to-one'
-
-const config: sql.config = {
-    user: 'sa',
-    password: 'MyPassword1!',
-    server: 'localhost',
-    port: 1433,
-    options: {
-        trustServerCertificate: true
-    }
-}
 
 const testDBName = 'testdb'
 
