@@ -17,7 +17,7 @@ export const createMSSQLAdapter = (deps: AdapterDependencies): IAdapter => {
         connect(): TE.TaskEither<EntityError, void> {
             return TE.fromNullable(new Error())(null)
         },
-        determineEntities(): TE.TaskEither<EntityError, Entity[]> {
+        determineEntities(): TE.TaskEither<EntityError, readonly Entity[]> {
             return determineEntities(deps)
         }
     }

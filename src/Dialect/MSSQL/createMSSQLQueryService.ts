@@ -17,13 +17,13 @@ type IQueryServiceEnv = {
 }
 
 
-type QueryVariable = {
+export type QueryVariable = {
     name: string,
     type: mssql.ISqlType,
     value: unknown
 }
 
-type QueryDescription = {
+export type QueryDescription = {
     variables: readonly QueryVariable[],
     query: string
 }

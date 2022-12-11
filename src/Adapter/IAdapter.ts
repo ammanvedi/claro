@@ -37,12 +37,12 @@ export type EntityRelationShip =
     | EntityRelationOneToOne
 
 export type Entity = {
-    id: EntityId,
-    fields: EntityField[]
+    id: Readonly<EntityId>,
+    fields: readonly EntityField[]
 }
 
 export interface IAdapter {
     connect(): TE.TaskEither<EntityError, void>
     determineRelationships(): TE.TaskEither<EntityError, EntityRelationShip[]>;
-    determineEntities(): TE.TaskEither<EntityError, Entity[]>
+    determineEntities(): TE.TaskEither<EntityError, readonly Entity[]>
 }

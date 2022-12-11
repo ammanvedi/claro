@@ -44,26 +44,37 @@ describe('MSSQLAdapter', function () {
 
             const determineEntities = await adapter.determineEntities()();
 
-            console.log(determineEntities)
+            expect(determineEntities).toEqual(    {
+                "_tag": "Right",
+                "right": [
+                    {
+                        "fields": [
+                            {
+                                "type": "Number",
+                                "id": "ID"
+                            },
+                            {
+                                "type": "String",
+                                "id": "Name"
+                            }
+                        ],
+                        "id": "Employee"
+                    },
+                    {
+                        "fields": [
+                            {
+                                "type": "Number",
+                                "id": "EmployeeID"
+                            },
+                            {
+                                "type": "Number",
+                                "id": "SalaryAmount"
+                            }
+                        ],
+                        "id": "Salary"
+                    }
+                ]
+            })
         })
-
-        // it('should determine a one to one relationship', async () => {
-        //     const relationships = await adapter.determineRelationships();
-        //     expect(relationships).toMatchObject([
-        //         {
-        //             type: EntityRelationType.OneToOne,
-        //             source: {
-        //                 id: 'Salary',
-        //                 field: 'EmployeeID'
-        //             },
-        //             destination: {
-        //                 id: 'Employee',
-        //                 field: 'ID'
-        //             }
-        //         }
-        //     ])
-        // })
-
-
     })
 });
