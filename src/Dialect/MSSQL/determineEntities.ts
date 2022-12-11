@@ -100,7 +100,7 @@ const getEntityModelForTable = (tableName: string): RTE.ReaderTaskEither<Adapter
     RTE.map(res => buildEntity(tableName, res.recordset)),
     RTE.chain(
         O.fold(
-            () => RTE.left(new Error()),
+            () => RTE.left(new Error('TODO better error')),
             entity => RTE.right(entity)
         )
     )
